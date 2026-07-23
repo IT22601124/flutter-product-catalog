@@ -1,5 +1,6 @@
 import '../models/product.dart';
 import '../httpClient/dio_client.dart';
+import '../resources/api_routes_resources.dart';
 
 class ApiService {
   final DioClient _dioClient;
@@ -8,7 +9,8 @@ class ApiService {
 
   Future<List<Product>> fetchProducts() async {
     try {
-      final response = await _dioClient.dio.get('/products');
+      // Use the centralized endpoint from ApiRoutesResources
+      final response = await _dioClient.dio.get(ApiRoutesResources.products);
 
       if (response.statusCode == 200) {
         List<dynamic> data = response.data;
