@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../constants/app_constants.dart';
 
 class FavoriteProvider with ChangeNotifier {
   Set<int> _favoriteIds = {};
-  static const String _prefKey = 'favorite_product_ids';
 
   Set<int> get favoriteIds => _favoriteIds;
 
@@ -13,7 +13,7 @@ class FavoriteProvider with ChangeNotifier {
 
   Future<void> _loadFavorites() async {
     final prefs = await SharedPreferences.getInstance();
-    final List<String>? storedIds = prefs.getStringList(_prefKey);
+    final List<String>? storedIds = prefs.getStringList(AppConstants.favoritePrefKey);
     if (storedIds != null) {
       _favoriteIds = storedIds.map((id) => int.parse(id)).toSet();
       notifyListeners();
@@ -34,7 +34,7 @@ class FavoriteProvider with ChangeNotifier {
 
     final prefs = await SharedPreferences.getInstance();
     await prefs.setStringList(
-      _prefKey,
+      AppConstants.favoritePrefKey,
       _favoriteIds.map((id) => id.toString()).toList(),
     );
   }

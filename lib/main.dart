@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'data/api_service.dart';
-import 'data/product_repository.dart';
+import 'repositories/api_service.dart';
+import 'repositories/product_repository.dart';
 import 'providers/product_provider.dart';
 import 'providers/favorite_provider.dart';
 import 'providers/theme_provider.dart';
