@@ -47,8 +47,10 @@ The project follows a layered architecture to ensure separation of concerns and 
 
 - **Models**: Data classes (e.g., `Product`) with JSON serialization.
 - **Repositories**:
-  - `ApiService`: Handles low-level HTTP communication using the `http` package.
-  - `ProductRepository`: Acts as a single source of truth for data, abstracting the API from the rest of the app.
+  - `ApiService`: Handles API communication logic using Dio.
+  - `ProductRepository`: Acts as a single source of truth for data.
+- **HTTP Client**:
+  - `httpClient/DioClient`: Centralized configuration for the Dio network client.
 - **Constants**:
   - `AppConstants`: Centralized storage for API URLs and preference keys.
 - **State Management (Providers)**:
