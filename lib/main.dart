@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'repositories/dio_client.dart';
 import 'repositories/api_service.dart';
 import 'repositories/product_repository.dart';
 import 'providers/product_provider.dart';
@@ -11,7 +12,9 @@ import 'ui/screens/product_list_screen.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   
-  final apiService = ApiService();
+  // Initialize Dio and Services
+  final dioClient = DioClient();
+  final apiService = ApiService(dioClient);
   final repository = ProductRepository(apiService);
 
   runApp(

@@ -1,17 +1,23 @@
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import '../models/product.dart';
-import '../constants/app_constants.dart';
+import 'dio_client.dart';
 
 class ApiService {
-  Future<List<Product>> fetchProducts() async {
-    final response = await http.get(Uri.parse('${AppConstants.baseUrl}/products'));
+  final DioClient _dioClient;
 
-    if (response.statusCode == 200) {
-      List<dynamic> data = json.decode(response.body);
-      return data.map((json) => Product.fromJson(json)).toList();
-    } else {
-      throw Exception('Failed to load products');
+  ApiService(this._dioClient);
+
+  Future<List<Product>> fetchProducts() async {
+    try {
+      final response = await _dioClient.dio.get('/products');
+
+      if (response.statusCode == 200) {
+        List<dynamic> data = response.data;
+        return data.map((json) => Product.fromJson(json)).toList();
+      } else {
+        throw Exception('Failed to load products');
+      }
+    } catch (e) {
+      throw Exception('Network error: ${e.toString()}');
     }
   }
 }
