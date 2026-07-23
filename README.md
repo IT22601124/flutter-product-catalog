@@ -1,17 +1,75 @@
-# product_catalog
+# Product Catalogue Application
 
-A new Flutter project.
+A polished Flutter application that displays a product catalogue fetched from the Fake Store API. This project demonstrates Flutter fundamentals, state management using Provider, API integration, and clean architecture.
 
-## Getting Started
+## Project Overview
+The application allows users to:
+- Browse a grid of products with images, names, prices, and categories.
+- Search for products by name with real-time updates.
+- View detailed information for each product.
+- Mark products as favorites, with status synced across screens and persisted locally.
+- Switch between Light and Dark themes with preference persistence.
+- Handle loading, error (with retry), and empty states gracefully.
 
-This project is a starting point for a Flutter application.
+## Setup Instructions
 
-A few resources to get you started if this is your first Flutter project:
+### Prerequisites
+- Flutter SDK (stable channel)
+- Android Studio / VS Code with Flutter extension
+- An Android/iOS emulator or physical device
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+### Installation
+1. Clone the repository.
+2. Navigate to the project directory:
+   ```bash
+   cd product_catalog
+   ```
+3. Install dependencies:
+   ```bash
+   flutter pub get
+   ```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Running the Project
+To run the app in debug mode:
+```bash
+flutter run
+```
+
+### Building APK
+To build a release APK:
+```bash
+flutter build apk --release
+```
+The APK will be located at `build/app/outputs/flutter-apk/app-release.apk`.
+
+## Architecture
+The project follows a layered architecture to ensure separation of concerns and maintainability:
+
+- **Models**: Data classes (e.g., `Product`) with JSON serialization.
+- **Data Layer**:
+  - `ApiService`: Handles low-level HTTP communication using the `http` package.
+  - `ProductRepository`: Acts as a single source of truth for data, abstracting the API from the rest of the app.
+- **State Management (Providers)**:
+  - `ProductProvider`: Manages product list, search filtering, and loading/error states.
+  - `FavoriteProvider`: Manages user favorites and handles persistence via `shared_preferences`.
+  - `ThemeProvider`: Manages theme switching and persistence.
+- **UI Layer**:
+  - **Screens**: High-level pages (`ProductListScreen`, `ProductDetailScreen`).
+  - **Widgets**: Reusable UI components (`ProductCard`, `FavoriteButton`).
+  - **Theme**: Centralized theme definitions using Material 3 and Google Fonts (Poppins).
+
+## Assumptions
+- The Fake Store API is stable and accessible.
+- A simple `Set<int>` is sufficient for managing favorites since we only store IDs.
+- `shared_preferences` is used for persistence as per the "simple local backend" suggestion.
+
+## Challenges & Solutions
+- **Image Loading**: Used `cached_network_image` to provide a better UX with placeholders and caching, preventing flickering on scroll.
+- **Search Logic**: Implemented substring matching in the `ProductProvider` to keep the UI responsive while typing.
+- **UI Polishing**: Used `Hero` animations for smooth transitions between list and detail views.
+
+## Future Improvements
+- Implement pagination or infinite scroll for larger datasets.
+- Add unit and widget tests for better code coverage.
+- Implement a more robust offline mode using a local database like Hive or Sqflite.
+- Add localized support for multiple languages.
