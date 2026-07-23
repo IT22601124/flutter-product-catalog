@@ -1,6 +1,5 @@
-import '../constants/app_constants.dart';
-
 class ApiRoutesResources {
-  static const String products = '${AppConstants.baseUrl}/products';
-  static String productDetails(int id) => '${AppConstants.baseUrl}/products/$id';
+  static const String baseUrl = 'https://fakestoreapi.com';
+  static const String products = '$baseUrl/products';
+  static String productDetails(int id) => '$baseUrl/products/$id';
 }

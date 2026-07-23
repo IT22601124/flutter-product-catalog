@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../constants/app_constants.dart';
+import '../resources/app_resource_configs.dart';
 
 class ThemeProvider with ChangeNotifier {
   bool _isDarkMode = false;
@@ -13,7 +13,7 @@ class ThemeProvider with ChangeNotifier {
 
   Future<void> _loadTheme() async {
     final prefs = await SharedPreferences.getInstance();
-    _isDarkMode = prefs.getBool(AppConstants.themePrefKey) ?? false;
+    _isDarkMode = prefs.getBool(AppResourceConfigs.themePrefKey) ?? false;
     notifyListeners();
   }
 
@@ -22,6 +22,6 @@ class ThemeProvider with ChangeNotifier {
     notifyListeners();
 
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(AppConstants.themePrefKey, _isDarkMode);
+    await prefs.setBool(AppResourceConfigs.themePrefKey, _isDarkMode);
   }
 }
