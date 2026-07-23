@@ -1,5 +1,5 @@
 import '../models/product.dart';
-import 'dio_client.dart';
+import '../httpClient/dio_client.dart';
 
 class ApiService {
   final DioClient _dioClient;

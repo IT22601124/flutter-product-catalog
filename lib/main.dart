@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'repositories/dio_client.dart';
+import 'httpClient/dio_client.dart';
 import 'repositories/api_service.dart';
 import 'repositories/product_repository.dart';
 import 'providers/product_provider.dart';

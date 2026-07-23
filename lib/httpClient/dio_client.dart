@@ -13,7 +13,6 @@ class DioClient {
       ),
     );
 
-    // Optional: Add interceptors for logging or header management
     _dio.interceptors.add(LogInterceptor(
       requestBody: true,
       responseBody: true,
