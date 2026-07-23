@@ -1,29 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'httpClient/dio_client.dart';
-import 'repositories/api_service.dart';
-import 'repositories/product_repository.dart';
-import 'providers/product_provider.dart';
-import 'providers/favorite_provider.dart';
+import 'helpers/main_helper.dart';
 import 'providers/theme_provider.dart';
 import 'ui/theme/app_theme.dart';
 import 'ui/screens/product_list_screen.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
+  MainHelper.initializeApp();
   
-  // Initialize Dio and Services
-  final dioClient = DioClient();
-  final apiService = ApiService(dioClient);
-  final repository = ProductRepository(apiService);
-
   runApp(
     MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => ProductProvider(repository)),
-        ChangeNotifierProvider(create: (_) => FavoriteProvider()),
-        ChangeNotifierProvider(create: (_) => ThemeProvider()),
-      ],
+      providers: MainHelper.getProviders(),
       child: const MyApp(),
     ),
   );
