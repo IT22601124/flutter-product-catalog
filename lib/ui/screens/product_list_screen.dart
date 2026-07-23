@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/product_provider.dart';
 import '../../providers/theme_provider.dart';
+import '../../resources/icon_resources.dart';
+import '../../resources/dimensions.dart';
 import '../widgets/product_card.dart';
 
 class ProductListScreen extends StatefulWidget {
@@ -37,7 +39,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
           Consumer<ThemeProvider>(
             builder: (context, themeProvider, child) {
               return IconButton(
-                icon: Icon(themeProvider.isDarkMode ? Icons.light_mode : Icons.dark_mode),
+                icon: Icon(themeProvider.isDarkMode ? IconResources.lightMode : IconResources.darkMode),
                 onPressed: () => themeProvider.toggleTheme(),
               );
             },
@@ -46,14 +48,17 @@ class _ProductListScreenState extends State<ProductListScreen> {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.symmetric(
+              horizontal: Dimensions.paddingSizeDefault,
+              vertical: Dimensions.paddingSizeSmall,
+            ),
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
                 hintText: 'Search products...',
-                prefixIcon: const Icon(Icons.search),
+                prefixIcon: const Icon(IconResources.search),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(Dimensions.radiusExtraLarge),
                   borderSide: BorderSide.none,
                 ),
                 filled: true,
@@ -77,7 +82,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('Error: ${provider.errorMessage}'),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: Dimensions.paddingSizeDefault),
                     ElevatedButton(
                       onPressed: () => provider.loadProducts(),
                       child: const Text('Retry'),
@@ -92,12 +97,12 @@ class _ProductListScreenState extends State<ProductListScreen> {
               return RefreshIndicator(
                 onRefresh: () => provider.loadProducts(),
                 child: GridView.builder(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(Dimensions.paddingSizeDefault),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     childAspectRatio: 0.7,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
+                    crossAxisSpacing: Dimensions.paddingSizeDefault,
+                    mainAxisSpacing: Dimensions.paddingSizeDefault,
                   ),
                   itemCount: provider.products.length,
                   itemBuilder: (context, index) {
