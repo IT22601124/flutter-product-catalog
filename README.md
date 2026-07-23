@@ -46,9 +46,11 @@ The APK will be located at `build/app/outputs/flutter-apk/app-release.apk`.
 The project follows a layered architecture to ensure separation of concerns and maintainability:
 
 - **Models**: Data classes (e.g., `Product`) with JSON serialization.
-- **Data Layer**:
+- **Repositories**:
   - `ApiService`: Handles low-level HTTP communication using the `http` package.
   - `ProductRepository`: Acts as a single source of truth for data, abstracting the API from the rest of the app.
+- **Constants**:
+  - `AppConstants`: Centralized storage for API URLs and preference keys.
 - **State Management (Providers)**:
   - `ProductProvider`: Manages product list, search filtering, and loading/error states.
   - `FavoriteProvider`: Manages user favorites and handles persistence via `shared_preferences`.
