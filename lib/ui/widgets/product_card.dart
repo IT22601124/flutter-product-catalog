@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:go_router/go_router.dart';
 import '../../models/product.dart';
 import 'favorite_button.dart';
-import '../screens/product_detail_screen.dart';
+import '../../utils/app_router.dart';
 import '../../resources/dimensions.dart';
 import '../../resources/color_resources.dart';
 import '../../resources/icon_resources.dart';
@@ -21,12 +22,7 @@ class ProductCard extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ProductDetailScreen(product: product),
-            ),
-          );
+          context.push(AppRouter.productDetail, extra: product);
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

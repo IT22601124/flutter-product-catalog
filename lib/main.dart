@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'helpers/main_helper.dart';
 import 'providers/theme_provider.dart';
 import 'ui/theme/app_theme.dart';
-import 'ui/screens/product_list_screen.dart';
+import 'utils/app_router.dart';
 
 void main() {
   MainHelper.initializeApp();
@@ -23,13 +23,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
 
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Product Catalog',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: themeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-      home: const ProductListScreen(),
+      routerConfig: AppRouter.router,
     );
   }
 }
