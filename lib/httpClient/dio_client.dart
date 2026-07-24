@@ -8,8 +8,8 @@ class DioClient {
     _dio = Dio(
       BaseOptions(
         baseUrl: ApiRoutesResources.baseUrl,
-        connectTimeout: const Duration(seconds: 30),
-        receiveTimeout: const Duration(seconds: 30),
+        connectTimeout: const Duration(seconds: 10),
+        receiveTimeout: const Duration(seconds: 10),
       ),
     );
 
